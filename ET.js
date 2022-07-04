@@ -32,9 +32,10 @@ window.addEventListener("DOMContentLoaded", () =>{
 function showUsersOnMyScreen(user){
 
     const parentNode = document.getElementById('users')
-    const childHTML = `<li> ${user.expenseAmount} - ${user.discription} - ${user.choosing}  
+    const childHTML = `<li id =${user.discription}> ${user.expenseAmount} - ${user.discription} - ${user.choosing}  
                     
-                   <button onclick = deleteUser('${user.discription}')>Delete Expense</button>
+                   <button onclick = deleteUser('${user.discription}')> Delete Expense </button>
+                   <button onclick = editUserDetails('${user.discription}','${user.expenseAmount}','${user.choosing}')>Edit User</button>
     
         </li>` 
 
@@ -43,8 +44,23 @@ function showUsersOnMyScreen(user){
     parentNode.innerHTML = parentNode.innerHTML + childHTML;
 }
 
+function editUserDetails(discription,expenseAmount,choosing){
+    document.getElementById('discription').value = discription;
+    document.getElementById('expenseAmount').value = expenseAmount;
+    document.getElementById('choosing').value = choosing;
+    deleteUser(discription);
 
-function deleteUser(item){
-    localStorage.removeItem(item)
+}
+
+function deleteUser(discription){
+    localStorage.removeItem(discription)
+    removeFromScreen(discription);
+}
+
+function removeFromScreen(discription){
+    const parentNode = document.getElementById('users');
+    const childToBeDeleted = document.getElementById(discription);
+
+    parentNode.removeChild(childToBeDeleted)
 }
 
