@@ -11,9 +11,18 @@ function saveData(event){
         choosing
     }
 
-    localStorage.setItem(myObj.discription, JSON.stringify(myObj));
+    axios.post("https://crudcrud.com/api/2c67132f7a4c4f9480ed84e1b0ffccc1/expenseData",myObj)
+    .then((response)=>{
+        showUsersOnMyScreen(response.data)
+        console.log(response)
+    })
+    .catch((err) =>{
+        console.log(err)
+    })
 
-    showUsersOnMyScreen(myObj);
+    // localStorage.setItem(myObj.discription, JSON.stringify(myObj));
+
+    // showUsersOnMyScreen(myObj);
 
 }
 
